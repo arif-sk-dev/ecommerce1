@@ -12,62 +12,180 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // console.log(new Date().getFullYear() +","+ new Date().getMonth());
 
 // pagination start here ===============
- const cardsPerPage = 10;
-  let currentPage = 1;
 
-  const cards = Array.from(document.querySelectorAll(".pro"));
+// let currentPage = 1;
+// const cards = Array.from(document.querySelectorAll(".pro"));
+// const cardsPerPage = 10;
 
-  function displayCards(page) {
-      const start = (page - 1) * cardsPerPage;
-      const end = start + cardsPerPage;
+//   function displayCards(page) {
+//       const start = (page - 1) * cardsPerPage;
+//       const end = start + cardsPerPage;
 
-      document.getElementById("pro-container").innerHTML = '';
+//       document.getElementById("pro-container").innerHTML = '';
       
-      cards.slice(start, end).forEach(card => {
-          document.getElementById("pro-container").appendChild(card.cloneNode(true));
-      });
-  }
+//       cards.slice(start, end).forEach(card => {
+//           document.getElementById("pro-container").appendChild(card.cloneNode(true));
+//       });
+//   }
 
-  function createPagination() {
-      const totalPages = Math.ceil(cards.length / cardsPerPage);
-      const pageButtonsContainer = document.getElementById("pageButtons");
-      pageButtonsContainer.innerHTML = '';
+//   function createPagination() {
+//       const totalPages = Math.ceil(cards.length / cardsPerPage);
+//       const pageButtonsContainer = document.getElementById("pageButtons");
+//       pageButtonsContainer.innerHTML = '';
 
-      for (let i = 1; i <= totalPages; i++) {
-          const button = document.createElement("button");
-          button.innerText = i;
-          button.classList.add("page-number");
-          if (i === currentPage) button.classList.add("active");
+//       for (let i = 1; i <= totalPages; i++) {
+//           const button = document.createElement("button");
+//           button.innerText = i;
+//           button.classList.add("page-number");
+//           if (i === currentPage) button.classList.add("active");
 
-          button.addEventListener("click", () => {
-              currentPage = i;
-              displayCards(currentPage);
-              createPagination();
-          });
+//           button.addEventListener("click", () => {
+//               currentPage = i;
+//               displayCards(currentPage);
+//               createPagination();
+//           });
 
-          pageButtonsContainer.appendChild(button);
-      }
-  }
+//           pageButtonsContainer.appendChild(button);
+//       }
+//   }
 
-  document.querySelector(".prev").addEventListener("click", () => {
-      if (currentPage > 1) {
-          currentPage--;
-          displayCards(currentPage);
-          createPagination();
-      }
-  });
+//   document.querySelector(".prev").addEventListener("click", () => {
+//       if (currentPage > 1) {
+//           currentPage--;
+//           displayCards(currentPage);
+//           createPagination();
+//       }
+//   });
 
-  document.querySelector(".next").addEventListener("click", () => {
-      const totalPages = Math.ceil(cards.length / cardsPerPage);
-      if (currentPage < totalPages) {
-          currentPage++;
-          displayCards(currentPage);
-          createPagination();
-      }
-  });
+//   document.querySelector(".next").addEventListener("click", () => {
+//       const totalPages = Math.ceil(cards.length / cardsPerPage);
+//       if (currentPage < totalPages) {
+//           currentPage++;
+//           displayCards(currentPage);
+//           createPagination();
+//       }
+//   });
 
-  displayCards(currentPage);
-  createPagination();
+//   displayCards(currentPage);
+//   createPagination();
+// alternative formula below here  =>>>>
+
+
+//====================
+(function () {
+    let currentPage = 1;
+    const cards = Array.from(document.querySelectorAll(".pro"));
+    const cardsPerPage = 10;
+
+    function displayCards(page) {
+        const start = (page - 1) * cardsPerPage;
+        const end = start + cardsPerPage;
+
+        document.getElementById("pro-container").innerHTML = '';
+
+        cards.slice(start, end).forEach(card => {
+            document.getElementById("pro-container").appendChild(card.cloneNode(true));
+        });
+    }
+
+    function createPagination() {
+        const totalPages = Math.ceil(cards.length / cardsPerPage);
+        const pageButtonsContainer = document.getElementById("pageButtons");
+        pageButtonsContainer.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement("button");
+            button.innerText = i;
+            button.classList.add("page-number");
+            if (i === currentPage) button.classList.add("active");
+
+            button.addEventListener("click", () => {
+                currentPage = i;
+                displayCards(currentPage);
+                createPagination();
+            });
+
+            pageButtonsContainer.appendChild(button);
+        }
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            displayCards(currentPage);
+            createPagination();
+        }
+    });
+
+    document.querySelector(".next").addEventListener("click", () => {
+        const totalPages = Math.ceil(cards.length / cardsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayCards(currentPage);
+            createPagination();
+        }
+    });
+
+    displayCards(currentPage);
+    createPagination();
+})();
 // pagination end here===========
 
+
+
+
+// cart section start here ============
+
+// let cartIcon = document.querySelector("#");
+// let cart = document.querySelector(".cart");
+// let closeCart = document.querySelector("#close-cart");
+
+// cartIcon.addEventListener("click", () =>cart.classList.add("active"));
+// cartIcon.onclick = () => {
+//     cart.classList.add("active");
+// }
+
+// document.addEventListener('click', function() {
+//     let cartIcon = document.querySelector("#");
+
+// });
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const cart = document.querySelector(".cart");
+//     const cartIcon = document.querySelector("#cart-icon");
+//     const closeCart = document.querySelector("#close-cart");
+
+//   cartIcon.addEventListener('click', () => {
+//     const cart = document.querySelector(".cart");
+//     if(cart) {
+//         cart.classList.add("active");
+//     } else {
+//         console.log('Cart element not found');
+        
+//     }
+//   });
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const cart = document.querySelector(".cart");
+  const closeCart = document.getElementById("close-cart");
+  const buyBtn = document.querySelector(".btn-buy");
+
+  // Sample trigger to open the cart 
+  const cartIcon = document.getElementById("cart-icon"); // Make sure this exists in your DOM
+  console.log(cartIcon);
+  
+  cartIcon.addEventListener('click', () => {
+    console.log("hello");
+    cart.classList.add("active");
+  });
+
+  closeCart.addEventListener("click", () => {
+    cart.classList.remove("active");
+  });
+
+  buyBtn.addEventListener("click", () => {
+    alert("Thanks for your purchase!");
+  });
+});
 

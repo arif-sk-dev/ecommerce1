@@ -269,14 +269,20 @@ body {
 .cart {
   position: fixed;
   top: 0;
-  right: 0;
+  right: -100%;
   bottom: 0;
   width: 320px;
   padding: 20px;
   background-color: beige;
   box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
   z-index: 1001;
+  transition: 0.4s;
+  overflow-y: auto;
 }
+.cart.active {
+  right: 0;
+}
+
 .cart .cart-title {
   margin-top: 0;
   font-weight: 600;
@@ -482,5 +488,6 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
 
 

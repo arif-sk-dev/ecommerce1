@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="shop.css">
-  <!-- remix icon link hrer  -->
+  <!-- remix icon link here  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>shop</title>
 </head>
@@ -20,7 +20,7 @@
       <li><a href="blogs.html">Blogs</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href=""><i class="ri-shopping-cart-2-line"></i></a></li>
+      <li><i class="ri-shopping-cart-2-line" id="cart-icon"></i></li>
       <a href="#"><i class="ri-close-large-line" onclick="closeNav()"></i></a>
     </div>
     <div class="mobileView">
@@ -369,9 +369,9 @@
   <!-- footer section end here -->
 
   
-  <script src="shop.js"></script>
+  <!-- <script src="shop.js"></script> -->
 
-  <!-- cart section start here  -->
+  <!-- cart section start here ================================ -->
   <div class="cart">
     <h3 class="cart-title">Your Cart</h3>
     <!-- content -->
@@ -395,8 +395,35 @@
     <!-- Buy button -->
     <button type="button" class="btn-buy">Buy Now</button>
     <!-- cart close -->
-    <i class="ri-close-large-fill"></i>
+    <i class="ri-close-large-fill" id="close-cart"></i>
   </div>
+
+  <!-- link to  js -->
+   <script src="shop.js"></script>
+
+   <!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const cart = document.querySelector(".cart");
+  const closeCart = document.getElementById("close-cart");
+  const buyBtn = document.querySelector(".btn-buy");
+
+  // Sample trigger to open the cart
+  const cartIcon = document.querySelector("#cart-icon"); // Make sure this exists in your DOM
+
+  cartIcon.addEventListener("click", () => {
+    cart.classList.add("active");
+  });
+
+  closeCart.addEventListener("click", () => {
+    cart.classList.remove("active");
+  });
+
+  buyBtn.addEventListener("click", () => {
+    alert("Thanks for your purchase!");
+    // Add further logic if needed
+  });
+});
+   </script> -->
 
   <!-- cart section end here  -->
 </body>
