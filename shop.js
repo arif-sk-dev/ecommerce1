@@ -136,7 +136,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 // cart section start here ============
 
-// let cartIcon = document.querySelector("#");
+// let cartIcon = document.querySelector("#cart-icon");
 // let cart = document.querySelector(".cart");
 // let closeCart = document.querySelector("#close-cart");
 
@@ -146,7 +146,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // }
 
 // document.addEventListener('click', function() {
-//     let cartIcon = document.querySelector("#");
+//     let cartIcon = document.querySelector("#cart-icon");
 
 // });
 
@@ -166,26 +166,98 @@ document.getElementById("year").textContent = new Date().getFullYear();
 //   });
 // });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const cart = document.querySelector(".cart");
-  const closeCart = document.getElementById("close-cart");
-  const buyBtn = document.querySelector(".btn-buy");
+// ==============================
 
-  // Sample trigger to open the cart 
-  const cartIcon = document.getElementById("cart-icon"); // Make sure this exists in your DOM
-  console.log(cartIcon);
+// document.addEventListener("DOMContentLoaded", function () {
+//   const cart = document.querySelector(".cart");
+//   const closeCart = document.getElementById("close-cart");
+//   const buyBtn = document.querySelector(".btn-buy");
+
+//   // Sample trigger to open the cart 
+//   const cartIcon = document.getElementById("cart-icon");
+//   console.log(cartIcon);
   
-  cartIcon.addEventListener('click', () => {
-    console.log("hello");
+//   // open cart
+//   cartIcon.addEventListener('click', () => {
+//     console.log("hello");
+//     cart.classList.add("active");
+//   });
+
+//   // close cart
+//   closeCart.addEventListener("click", () => {
+//     cart.classList.remove("active");
+//   });
+//   // popup alert/ greeting to purchase 
+//   buyBtn.addEventListener("click", () => {
+//     alert("Thanks for your purchase!");
+//   });
+
+//   // cart working
+//   if(document.readyState == 'loading') {
+//     document.addEventListener('DOMContentLoaded', ready);
+//   } else {
+//     ready();    
+//   }
+
+//   // Making function
+//   function ready() {
+//     var removeCartButtons = document.getElementById('#remove-cart');
+//     console.log('removeCartButtons');
+//     for (var i=0; i < removeCartButtons.length; i++){
+//         var button = removeCartButtons[i]
+//         button.addEventListener('click', removeCartItem)
+//     }
+//   }
+
+//   // Remove Items from cart
+//   function removeCartItem(event) {
+//     var buttonClicked = event.target
+//     buttonClicked.parentElement.remove()
+//   }
+
+// });
+
+// =================
+let cartIcon = document.querySelector("#cart-icon");
+let cart = document.querySelector(".cart");
+let closeCart = document.querySelector("#close-cart");
+
+
+// Open cart
+cartIcon.onclick = () => {
     cart.classList.add("active");
-  });
+}
 
-  closeCart.addEventListener("click", () => {
+// Close cart
+closeCart.onclick = () => {
     cart.classList.remove("active");
-  });
+}
 
-  buyBtn.addEventListener("click", () => {
-    alert("Thanks for your purchase!");
-  });
-});
+// cart working
+  if(document.readyState == "loading") {
+    document.addEventListener("DOMContentLoaded", ready);
+  } else {
+    ready();
+  }
+
+  // Making function 
+  function ready() {
+
+    // Remove items from cart
+    var removeCartButtons = document.getElementsByClassName("cart-remove");
+    console.log("removeCartButtons");
+    console.log("remove Cart");
+    
+    for (var i=0; i < removeCartButtons.length; i++) {
+        var button = removeCartButtons[i]
+        button.addEventListener('click', removeCartItem);
+    }
+  }
+
+  // Remove items from cart 
+  function removeCartItem(event) {
+    var buttonClicked = event.target
+    buttonClicked.parentElement.remove();
+  }
+
 
