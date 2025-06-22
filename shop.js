@@ -245,8 +245,8 @@ closeCart.onclick = () => {
 
     // Remove items from cart
     var removeCartButtons = document.getElementsByClassName("cart-remove");
-    console.log("removeCartButtons");
-    console.log("remove Cart");
+    // console.log("removeCartButtons");
+    // console.log("remove Cart");
     
     for (var i=0; i < removeCartButtons.length; i++) {
         var button = removeCartButtons[i]
@@ -260,7 +260,7 @@ closeCart.onclick = () => {
     }
     // Add to cart
     var addCart = document.getElementsByClassName("add-cart");
-    for (var i=0; i<addCart.length; i++) {
+    for (var i=0; i  < addCart.length; i++) {
       var button = addCart[i];
       button.addEventListener("click", addCartClicked);
     }
@@ -279,14 +279,26 @@ function quantityChanged(event) {
   if (isNaN(input.value) || input.value<=0) {
     input.value = 1;
   }
-  updatetotal();
+  updatetotal(); //to update total amount 
 }
 // Add to cart by click
 function addCartClicked(event) {
-  var button = event.target
-  var shopProducts = button.parentElement
-  var title = shopProducts.getElementsByClassName("product-title");
+  var button = event.target;
+  var shopProducts = button.closest('.pro'); // Adjusted to target the main card con
+  // var shopProducts = button.parentElement;
+  var title = shopProducts.getElementsByClassName("product-title")[0].innerText;
+  var price = shopProducts.getElementsByClassName("price")[0].innerText;
+  var productImg = shopProducts.getElementsByClassName("productImg")[0].src;
+  // console.log(title, price, productImg); //to check by console
+  addProductToCart(title, price, productImg);
+
+  updatetotal();
 }
+
+function addProductToCart(title, price, productImg) {
+  var 
+}
+
 
 // Update total 
 function updatetotal() {
