@@ -12,66 +12,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // console.log(new Date().getFullYear() +","+ new Date().getMonth());
 
 // pagination start here ===============
-
-// let currentPage = 1;
-// const cards = Array.from(document.querySelectorAll(".pro"));
-// const cardsPerPage = 10;
-
-//   function displayCards(page) {
-//       const start = (page - 1) * cardsPerPage;
-//       const end = start + cardsPerPage;
-
-//       document.getElementById("pro-container").innerHTML = '';
-      
-//       cards.slice(start, end).forEach(card => {
-//           document.getElementById("pro-container").appendChild(card.cloneNode(true));
-//       });
-//   }
-
-//   function createPagination() {
-//       const totalPages = Math.ceil(cards.length / cardsPerPage);
-//       const pageButtonsContainer = document.getElementById("pageButtons");
-//       pageButtonsContainer.innerHTML = '';
-
-//       for (let i = 1; i <= totalPages; i++) {
-//           const button = document.createElement("button");
-//           button.innerText = i;
-//           button.classList.add("page-number");
-//           if (i === currentPage) button.classList.add("active");
-
-//           button.addEventListener("click", () => {
-//               currentPage = i;
-//               displayCards(currentPage);
-//               createPagination();
-//           });
-
-//           pageButtonsContainer.appendChild(button);
-//       }
-//   }
-
-//   document.querySelector(".prev").addEventListener("click", () => {
-//       if (currentPage > 1) {
-//           currentPage--;
-//           displayCards(currentPage);
-//           createPagination();
-//       }
-//   });
-
-//   document.querySelector(".next").addEventListener("click", () => {
-//       const totalPages = Math.ceil(cards.length / cardsPerPage);
-//       if (currentPage < totalPages) {
-//           currentPage++;
-//           displayCards(currentPage);
-//           createPagination();
-//       }
-//   });
-
-//   displayCards(currentPage);
-//   createPagination();
-// alternative formula below here  =>>>>
-
-
-//====================
 (function () {
     let currentPage = 1;
     const cards = Array.from(document.querySelectorAll(".pro"));
@@ -132,96 +72,10 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // pagination end here===========
 
 
-
-
 // cart section start here ============
-
-// let cartIcon = document.querySelector("#cart-icon");
-// let cart = document.querySelector(".cart");
-// let closeCart = document.querySelector("#close-cart");
-
-// cartIcon.addEventListener("click", () =>cart.classList.add("active"));
-// cartIcon.onclick = () => {
-//     cart.classList.add("active");
-// }
-
-// document.addEventListener('click', function() {
-//     let cartIcon = document.querySelector("#cart-icon");
-
-// });
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const cart = document.querySelector(".cart");
-//     const cartIcon = document.querySelector("#cart-icon");
-//     const closeCart = document.querySelector("#close-cart");
-
-//   cartIcon.addEventListener('click', () => {
-//     const cart = document.querySelector(".cart");
-//     if(cart) {
-//         cart.classList.add("active");
-//     } else {
-//         console.log('Cart element not found');
-        
-//     }
-//   });
-// });
-
-// ==============================
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const cart = document.querySelector(".cart");
-//   const closeCart = document.getElementById("close-cart");
-//   const buyBtn = document.querySelector(".btn-buy");
-
-//   // Sample trigger to open the cart 
-//   const cartIcon = document.getElementById("cart-icon");
-//   console.log(cartIcon);
-  
-//   // open cart
-//   cartIcon.addEventListener('click', () => {
-//     console.log("hello");
-//     cart.classList.add("active");
-//   });
-
-//   // close cart
-//   closeCart.addEventListener("click", () => {
-//     cart.classList.remove("active");
-//   });
-//   // popup alert/ greeting to purchase 
-//   buyBtn.addEventListener("click", () => {
-//     alert("Thanks for your purchase!");
-//   });
-
-//   // cart working
-//   if(document.readyState == 'loading') {
-//     document.addEventListener('DOMContentLoaded', ready);
-//   } else {
-//     ready();    
-//   }
-
-//   // Making function
-//   function ready() {
-//     var removeCartButtons = document.getElementById('#remove-cart');
-//     console.log('removeCartButtons');
-//     for (var i=0; i < removeCartButtons.length; i++){
-//         var button = removeCartButtons[i]
-//         button.addEventListener('click', removeCartItem)
-//     }
-//   }
-
-//   // Remove Items from cart
-//   function removeCartItem(event) {
-//     var buttonClicked = event.target
-//     buttonClicked.parentElement.remove()
-//   }
-
-// });
-
-// =================
 let cartIcon = document.querySelector("#cart-icon");
 let cart = document.querySelector(".cart");
 let closeCart = document.querySelector("#close-cart");
-
 
 // Open cart
 cartIcon.onclick = () => {
@@ -264,7 +118,18 @@ closeCart.onclick = () => {
       var button = addCart[i];
       button.addEventListener("click", addCartClicked);
     }
+    //Buy button work
+    document.getElementsByClassName("btn-buy")[0].addEventListener('click', buyButtonClicked);
   }
+  //Buy button function
+function buyButtonClicked() {
+  alert("Your order is placed.");
+  var cartContent = document.getElementsByClassName("cart-content")[0];
+  while (cartContent.hasChildNodes()) {
+    cartContent.removeChild(cartContent.firstChild);
+  }
+  updatetotal();
+}
 
   // Remove items from cart 
   function removeCartItem(event) {
@@ -296,11 +161,39 @@ function addCartClicked(event) {
 }
 
 function addProductToCart(title, price, productImg) {
-  var 
+  var cartItems = document.querySelector(".cart-content");
+  var cartItemsNames = cartItems.querySelectorAll(".cart-product-title");
+
+  // Normalize and compare product titles to prevent duplicate adds
+  for (var i = 0; i < cartItemsNames.length; i++) {
+    if (cartItemsNames[i].textContent.trim().toLowerCase() === title.trim().toLowerCase()) {
+      alert("You have already added this item to the cart.");
+      return;
+    }
+  }
+
+  // Create new cart box
+  var cartShopBox = document.createElement("div");
+  cartShopBox.classList.add("cart-box");
+
+  var cartBoxContent = `
+    <img src="${productImg}" alt="" class="cart-img">
+    <div class="detail-box">
+      <div class="cart-product-title">${title}</div>
+      <div class="cart-price">${price}</div>
+      <input type="number" value="1" min="1" class="cart-quantity">
+    </div>
+    <i class="ri-delete-bin-6-fill cart-remove"></i>`;
+
+  cartShopBox.innerHTML = cartBoxContent;
+  cartItems.appendChild(cartShopBox);
+
+  // Add event listeners for remove and quantity change
+  cartShopBox.querySelector(".cart-remove").addEventListener("click", removeCartItem);
+  cartShopBox.querySelector(".cart-quantity").addEventListener("change", quantityChanged);
 }
 
-
-// Update total 
+// Update/Calculate total 
 function updatetotal() {
   var cartContent = document.getElementsByClassName("cart-content")[0]
   var cartBoxes = cartContent.getElementsByClassName("cart-box")
@@ -312,12 +205,9 @@ function updatetotal() {
     var price = parseFloat(priceElement.innerText.replace("$",""));
     var quantity = quantityElement.value
     total = total + (price * quantity);
-
+  }
     //if price contains some cents value
     total = Math.round(total * 100) / 100;
-
     document.getElementsByClassName("total-price")[0].innerText = "$" + total;
-  }
 }
-
-
+// Cart section end here =========
