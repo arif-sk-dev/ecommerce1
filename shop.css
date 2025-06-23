@@ -489,20 +489,6 @@ body {
     display: grid;
     grid-template-columns: 1fr;
   }
-  /* cart section small screen responsive */
-  .cart {
-  /* position: fixed;
-  top: 0;
-  right: -100%;
-  bottom: 0; */
-  width: 20vw;
-  /* padding: 20px;
-  background-color: beige;
-  box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
-  z-index: 1001;
-  transition: 0.4s;
-  overflow-y: auto; */
-  }
 }
 
 
