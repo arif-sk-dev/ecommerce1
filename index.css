@@ -662,9 +662,9 @@ body {
   transition: 0.4s;
   overflow-y: auto;
 }
-.cart.active {
+/* .cart.active {
   right: 0;
-}
+} */
 
 .cart .cart-title {
   margin-top: 0;
